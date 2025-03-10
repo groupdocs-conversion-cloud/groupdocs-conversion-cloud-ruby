@@ -1,7 +1,7 @@
  #
  # --------------------------------------------------------------------------------------------------------------------
  # <copyright company="Aspose Pty Ltd" file="jpg_convert_options.rb">
- #   Copyright (c) 2003-2024 Aspose Pty Ltd
+ #   Copyright (c) Aspose Pty Ltd
  # </copyright>
  # <summary>
  #  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -76,6 +76,9 @@ module GroupDocsConversionCloud
     # Image flip mode
     attr_accessor :flip_mode
 
+    # Gets or sets a background color.
+    attr_accessor :background_color
+
     # Desired image quality when converting to Jpeg. The value must be between 0 and 100. The default value is 100.
     attr_accessor :quality
     class EnumAttributeValidator
@@ -118,6 +121,7 @@ module GroupDocsConversionCloud
         :'contrast' => :'Contrast',
         :'gamma' => :'Gamma',
         :'flip_mode' => :'FlipMode',
+        :'background_color' => :'BackgroundColor',
         :'quality' => :'Quality'
       }
     end
@@ -140,6 +144,7 @@ module GroupDocsConversionCloud
         :'contrast' => :'Integer',
         :'gamma' => :'Float',
         :'flip_mode' => :'String',
+        :'background_color' => :'String',
         :'quality' => :'Integer'
       }
     end
@@ -212,6 +217,10 @@ module GroupDocsConversionCloud
 
       if attributes.key?(:'FlipMode')
         self.flip_mode = attributes[:'FlipMode']
+      end
+
+      if attributes.key?(:'BackgroundColor')
+        self.background_color = attributes[:'BackgroundColor']
       end
 
       if attributes.key?(:'Quality')
@@ -339,6 +348,7 @@ module GroupDocsConversionCloud
           contrast == other.contrast &&
           gamma == other.gamma &&
           flip_mode == other.flip_mode &&
+          background_color == other.background_color &&
           quality == other.quality
     end
 
@@ -351,7 +361,7 @@ module GroupDocsConversionCloud
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [from_page, pages_count, pages, watermark_options, width, height, horizontal_resolution, vertical_resolution, grayscale, rotate_angle, use_pdf, brightness, contrast, gamma, flip_mode, quality].hash
+      [from_page, pages_count, pages, watermark_options, width, height, horizontal_resolution, vertical_resolution, grayscale, rotate_angle, use_pdf, brightness, contrast, gamma, flip_mode, background_color, quality].hash
     end
 
     # Downcases first letter.

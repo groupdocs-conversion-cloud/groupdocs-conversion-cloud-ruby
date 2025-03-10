@@ -1,7 +1,7 @@
  #
  # --------------------------------------------------------------------------------------------------------------------
  # <copyright company="Aspose Pty Ltd" file="psd_convert_options.rb">
- #   Copyright (c) 2003-2024 Aspose Pty Ltd
+ #   Copyright (c) Aspose Pty Ltd
  # </copyright>
  # <summary>
  #  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -76,6 +76,9 @@ module GroupDocsConversionCloud
     # Image flip mode
     attr_accessor :flip_mode
 
+    # Gets or sets a background color.
+    attr_accessor :background_color
+
     # Bits count per color channel
     attr_accessor :channel_bits_count
 
@@ -130,6 +133,7 @@ module GroupDocsConversionCloud
         :'contrast' => :'Contrast',
         :'gamma' => :'Gamma',
         :'flip_mode' => :'FlipMode',
+        :'background_color' => :'BackgroundColor',
         :'channel_bits_count' => :'ChannelBitsCount',
         :'channels_count' => :'ChannelsCount',
         :'color_mode' => :'ColorMode',
@@ -156,6 +160,7 @@ module GroupDocsConversionCloud
         :'contrast' => :'Integer',
         :'gamma' => :'Float',
         :'flip_mode' => :'String',
+        :'background_color' => :'String',
         :'channel_bits_count' => :'Integer',
         :'channels_count' => :'Integer',
         :'color_mode' => :'String',
@@ -232,6 +237,10 @@ module GroupDocsConversionCloud
 
       if attributes.key?(:'FlipMode')
         self.flip_mode = attributes[:'FlipMode']
+      end
+
+      if attributes.key?(:'BackgroundColor')
+        self.background_color = attributes[:'BackgroundColor']
       end
 
       if attributes.key?(:'ChannelBitsCount')
@@ -427,6 +436,7 @@ module GroupDocsConversionCloud
           contrast == other.contrast &&
           gamma == other.gamma &&
           flip_mode == other.flip_mode &&
+          background_color == other.background_color &&
           channel_bits_count == other.channel_bits_count &&
           channels_count == other.channels_count &&
           color_mode == other.color_mode &&
@@ -443,7 +453,7 @@ module GroupDocsConversionCloud
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [from_page, pages_count, pages, watermark_options, width, height, horizontal_resolution, vertical_resolution, grayscale, rotate_angle, use_pdf, brightness, contrast, gamma, flip_mode, channel_bits_count, channels_count, color_mode, compression_method, version].hash
+      [from_page, pages_count, pages, watermark_options, width, height, horizontal_resolution, vertical_resolution, grayscale, rotate_angle, use_pdf, brightness, contrast, gamma, flip_mode, background_color, channel_bits_count, channels_count, color_mode, compression_method, version].hash
     end
 
     # Downcases first letter.
