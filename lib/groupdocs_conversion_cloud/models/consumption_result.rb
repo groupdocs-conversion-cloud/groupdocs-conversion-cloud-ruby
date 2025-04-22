@@ -37,11 +37,15 @@ module GroupDocsConversionCloud
     # Amount of MBs processed
     attr_accessor :quantity
 
+    # Billed API calls number
+    attr_accessor :billed_api_calls
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'credit' => :'Credit',
-        :'quantity' => :'Quantity'
+        :'quantity' => :'Quantity',
+        :'billed_api_calls' => :'BilledApiCalls'
       }
     end
 
@@ -49,7 +53,8 @@ module GroupDocsConversionCloud
     def self.swagger_types
       {
         :'credit' => :'Float',
-        :'quantity' => :'Float'
+        :'quantity' => :'Float',
+        :'billed_api_calls' => :'Float'
       }
     end
 
@@ -69,6 +74,10 @@ module GroupDocsConversionCloud
         self.quantity = attributes[:'Quantity']
       end
 
+      if attributes.key?(:'BilledApiCalls')
+        self.billed_api_calls = attributes[:'BilledApiCalls']
+      end
+
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -83,6 +92,10 @@ module GroupDocsConversionCloud
         invalid_properties.push("invalid value for 'quantity', quantity cannot be nil.")
       end
 
+      if @billed_api_calls.nil?
+        invalid_properties.push("invalid value for 'billed_api_calls', billed_api_calls cannot be nil.")
+      end
+
       return invalid_properties
     end
 
@@ -91,6 +104,7 @@ module GroupDocsConversionCloud
     def valid?
       return false if @credit.nil?
       return false if @quantity.nil?
+      return false if @billed_api_calls.nil?
       return true
     end
 
@@ -100,7 +114,8 @@ module GroupDocsConversionCloud
       return true if self.equal?(other)
       self.class == other.class &&
           credit == other.credit &&
-          quantity == other.quantity
+          quantity == other.quantity &&
+          billed_api_calls == other.billed_api_calls
     end
 
     # @see the `==` method
@@ -112,7 +127,7 @@ module GroupDocsConversionCloud
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [credit, quantity].hash
+      [credit, quantity, billed_api_calls].hash
     end
 
     # Downcases first letter.
