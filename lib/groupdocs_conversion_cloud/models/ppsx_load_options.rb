@@ -34,6 +34,27 @@ module GroupDocsConversionCloud
     # The format of input file, (\"docx\", for example). This field must be filled with correct input file format when using ConvertDirect method, which accept input file as binary stream, and, because of that, API can correctly handle LoadOptions. In regular conversion, the input file format taken from the input file name and this field ignored.
     attr_accessor :format
 
+    # Determines whether the document structure should be preserved when converting     to PDF (default is false).
+    attr_accessor :preserve_document_structure
+
+    # Value indicating whether custom document properties should be cleared.
+    attr_accessor :clear_custom_document_properties
+
+    # Value indicating whether built in document properties should be cleared.
+    attr_accessor :clear_built_in_document_properties
+
+    # Implements GroupDocs.Conversion.Contracts.IDocumentsContainerLoadOptions.Depth     Default: 1
+    attr_accessor :depth
+
+    # Implements GroupDocs.Conversion.Contracts.IDocumentsContainerLoadOptions.ConvertOwned     Default is false
+    attr_accessor :convert_owned
+
+    # Implements GroupDocs.Conversion.Contracts.IDocumentsContainerLoadOptions.ConvertOwner     Default is true
+    attr_accessor :convert_owner
+
+    # Show hidden slides.
+    attr_accessor :show_hidden_slides
+
     # Default font for rendering the presentation. The following font will be used if a presentation font is missing.
     attr_accessor :default_font
 
@@ -43,21 +64,49 @@ module GroupDocsConversionCloud
     # Set password to unprotect protected document
     attr_accessor :password
 
-    # Hide comments
-    attr_accessor :hide_comments
+    # Represents the way comments are printed with the slide. Default is None.
+    attr_accessor :comments_position
 
-    # Show hidden slides
-    attr_accessor :show_hidden_slides
+    # Represents the way notes are printed with the slide. Default is None.
+    attr_accessor :notes_position
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
+
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
+
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'format' => :'Format',
+        :'preserve_document_structure' => :'PreserveDocumentStructure',
+        :'clear_custom_document_properties' => :'ClearCustomDocumentProperties',
+        :'clear_built_in_document_properties' => :'ClearBuiltInDocumentProperties',
+        :'depth' => :'Depth',
+        :'convert_owned' => :'ConvertOwned',
+        :'convert_owner' => :'ConvertOwner',
+        :'show_hidden_slides' => :'ShowHiddenSlides',
         :'default_font' => :'DefaultFont',
         :'font_substitutes' => :'FontSubstitutes',
         :'password' => :'Password',
-        :'hide_comments' => :'HideComments',
-        :'show_hidden_slides' => :'ShowHiddenSlides'
+        :'comments_position' => :'CommentsPosition',
+        :'notes_position' => :'NotesPosition'
       }
     end
 
@@ -65,11 +114,18 @@ module GroupDocsConversionCloud
     def self.swagger_types
       {
         :'format' => :'String',
+        :'preserve_document_structure' => :'BOOLEAN',
+        :'clear_custom_document_properties' => :'BOOLEAN',
+        :'clear_built_in_document_properties' => :'BOOLEAN',
+        :'depth' => :'Integer',
+        :'convert_owned' => :'BOOLEAN',
+        :'convert_owner' => :'BOOLEAN',
+        :'show_hidden_slides' => :'BOOLEAN',
         :'default_font' => :'String',
         :'font_substitutes' => :'Hash<String, String>',
         :'password' => :'String',
-        :'hide_comments' => :'BOOLEAN',
-        :'show_hidden_slides' => :'BOOLEAN'
+        :'comments_position' => :'String',
+        :'notes_position' => :'String'
       }
     end
 
@@ -83,6 +139,34 @@ module GroupDocsConversionCloud
 
       if attributes.key?(:'Format')
         self.format = attributes[:'Format']
+      end
+
+      if attributes.key?(:'PreserveDocumentStructure')
+        self.preserve_document_structure = attributes[:'PreserveDocumentStructure']
+      end
+
+      if attributes.key?(:'ClearCustomDocumentProperties')
+        self.clear_custom_document_properties = attributes[:'ClearCustomDocumentProperties']
+      end
+
+      if attributes.key?(:'ClearBuiltInDocumentProperties')
+        self.clear_built_in_document_properties = attributes[:'ClearBuiltInDocumentProperties']
+      end
+
+      if attributes.key?(:'Depth')
+        self.depth = attributes[:'Depth']
+      end
+
+      if attributes.key?(:'ConvertOwned')
+        self.convert_owned = attributes[:'ConvertOwned']
+      end
+
+      if attributes.key?(:'ConvertOwner')
+        self.convert_owner = attributes[:'ConvertOwner']
+      end
+
+      if attributes.key?(:'ShowHiddenSlides')
+        self.show_hidden_slides = attributes[:'ShowHiddenSlides']
       end
 
       if attributes.key?(:'DefaultFont')
@@ -99,12 +183,12 @@ module GroupDocsConversionCloud
         self.password = attributes[:'Password']
       end
 
-      if attributes.key?(:'HideComments')
-        self.hide_comments = attributes[:'HideComments']
+      if attributes.key?(:'CommentsPosition')
+        self.comments_position = attributes[:'CommentsPosition']
       end
 
-      if attributes.key?(:'ShowHiddenSlides')
-        self.show_hidden_slides = attributes[:'ShowHiddenSlides']
+      if attributes.key?(:'NotesPosition')
+        self.notes_position = attributes[:'NotesPosition']
       end
 
     end
@@ -113,12 +197,40 @@ module GroupDocsConversionCloud
     # @return Array for valid properies with the reasons
     def list_invalid_properties
       invalid_properties = []
-      if @hide_comments.nil?
-        invalid_properties.push("invalid value for 'hide_comments', hide_comments cannot be nil.")
+      if @preserve_document_structure.nil?
+        invalid_properties.push("invalid value for 'preserve_document_structure', preserve_document_structure cannot be nil.")
+      end
+
+      if @clear_custom_document_properties.nil?
+        invalid_properties.push("invalid value for 'clear_custom_document_properties', clear_custom_document_properties cannot be nil.")
+      end
+
+      if @clear_built_in_document_properties.nil?
+        invalid_properties.push("invalid value for 'clear_built_in_document_properties', clear_built_in_document_properties cannot be nil.")
+      end
+
+      if @depth.nil?
+        invalid_properties.push("invalid value for 'depth', depth cannot be nil.")
+      end
+
+      if @convert_owned.nil?
+        invalid_properties.push("invalid value for 'convert_owned', convert_owned cannot be nil.")
+      end
+
+      if @convert_owner.nil?
+        invalid_properties.push("invalid value for 'convert_owner', convert_owner cannot be nil.")
       end
 
       if @show_hidden_slides.nil?
         invalid_properties.push("invalid value for 'show_hidden_slides', show_hidden_slides cannot be nil.")
+      end
+
+      if @comments_position.nil?
+        invalid_properties.push("invalid value for 'comments_position', comments_position cannot be nil.")
+      end
+
+      if @notes_position.nil?
+        invalid_properties.push("invalid value for 'notes_position', notes_position cannot be nil.")
       end
 
       return invalid_properties
@@ -127,9 +239,48 @@ module GroupDocsConversionCloud
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @hide_comments.nil?
+      return false if @preserve_document_structure.nil?
+      return false if @clear_custom_document_properties.nil?
+      return false if @clear_built_in_document_properties.nil?
+      return false if @depth.nil?
+      return false if @convert_owned.nil?
+      return false if @convert_owner.nil?
       return false if @show_hidden_slides.nil?
+      return false if @comments_position.nil?
+      comments_position_validator = EnumAttributeValidator.new('String', ["None", "Bottom", "Right"])
+      return false unless comments_position_validator.valid?(@comments_position)
+      return false if @notes_position.nil?
+      notes_position_validator = EnumAttributeValidator.new('String', ["None", "BottomTruncated", "BottomFull"])
+      return false unless notes_position_validator.valid?(@notes_position)
       return true
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] comments_position Object to be assigned
+    def comments_position=(comments_position)
+      validator = EnumAttributeValidator.new('String', ["None", "Bottom", "Right"])
+      if comments_position.to_i == 0
+        unless validator.valid?(comments_position)
+          raise ArgumentError, "invalid value for 'comments_position', must be one of #{validator.allowable_values}."
+        end
+        @comments_position = comments_position
+      else
+        @comments_position = validator.allowable_values[comments_position.to_i]
+      end
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] notes_position Object to be assigned
+    def notes_position=(notes_position)
+      validator = EnumAttributeValidator.new('String', ["None", "BottomTruncated", "BottomFull"])
+      if notes_position.to_i == 0
+        unless validator.valid?(notes_position)
+          raise ArgumentError, "invalid value for 'notes_position', must be one of #{validator.allowable_values}."
+        end
+        @notes_position = notes_position
+      else
+        @notes_position = validator.allowable_values[notes_position.to_i]
+      end
     end
 
     # Checks equality by comparing each attribute.
@@ -138,11 +289,18 @@ module GroupDocsConversionCloud
       return true if self.equal?(other)
       self.class == other.class &&
           format == other.format &&
+          preserve_document_structure == other.preserve_document_structure &&
+          clear_custom_document_properties == other.clear_custom_document_properties &&
+          clear_built_in_document_properties == other.clear_built_in_document_properties &&
+          depth == other.depth &&
+          convert_owned == other.convert_owned &&
+          convert_owner == other.convert_owner &&
+          show_hidden_slides == other.show_hidden_slides &&
           default_font == other.default_font &&
           font_substitutes == other.font_substitutes &&
           password == other.password &&
-          hide_comments == other.hide_comments &&
-          show_hidden_slides == other.show_hidden_slides
+          comments_position == other.comments_position &&
+          notes_position == other.notes_position
     end
 
     # @see the `==` method
@@ -154,7 +312,7 @@ module GroupDocsConversionCloud
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [format, default_font, font_substitutes, password, hide_comments, show_hidden_slides].hash
+      [format, preserve_document_structure, clear_custom_document_properties, clear_built_in_document_properties, depth, convert_owned, convert_owner, show_hidden_slides, default_font, font_substitutes, password, comments_position, notes_position].hash
     end
 
     # Downcases first letter.

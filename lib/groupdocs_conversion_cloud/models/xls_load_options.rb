@@ -58,8 +58,29 @@ module GroupDocsConversionCloud
     # Set password to unprotect protected document
     attr_accessor :password
 
-    # Hide comments
-    attr_accessor :hide_comments
+    # Represents the way comments are printed with the sheet. Default is PrintNoComments.
+    attr_accessor :print_comments
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
+
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
+
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
@@ -73,7 +94,7 @@ module GroupDocsConversionCloud
         :'convert_range' => :'ConvertRange',
         :'skip_empty_rows_and_columns' => :'SkipEmptyRowsAndColumns',
         :'password' => :'Password',
-        :'hide_comments' => :'HideComments'
+        :'print_comments' => :'PrintComments'
       }
     end
 
@@ -89,7 +110,7 @@ module GroupDocsConversionCloud
         :'convert_range' => :'String',
         :'skip_empty_rows_and_columns' => :'BOOLEAN',
         :'password' => :'String',
-        :'hide_comments' => :'BOOLEAN'
+        :'print_comments' => :'String'
       }
     end
 
@@ -139,8 +160,8 @@ module GroupDocsConversionCloud
         self.password = attributes[:'Password']
       end
 
-      if attributes.key?(:'HideComments')
-        self.hide_comments = attributes[:'HideComments']
+      if attributes.key?(:'PrintComments')
+        self.print_comments = attributes[:'PrintComments']
       end
 
     end
@@ -165,8 +186,8 @@ module GroupDocsConversionCloud
         invalid_properties.push("invalid value for 'skip_empty_rows_and_columns', skip_empty_rows_and_columns cannot be nil.")
       end
 
-      if @hide_comments.nil?
-        invalid_properties.push("invalid value for 'hide_comments', hide_comments cannot be nil.")
+      if @print_comments.nil?
+        invalid_properties.push("invalid value for 'print_comments', print_comments cannot be nil.")
       end
 
       return invalid_properties
@@ -179,8 +200,24 @@ module GroupDocsConversionCloud
       return false if @show_hidden_sheets.nil?
       return false if @one_page_per_sheet.nil?
       return false if @skip_empty_rows_and_columns.nil?
-      return false if @hide_comments.nil?
+      return false if @print_comments.nil?
+      print_comments_validator = EnumAttributeValidator.new('String', ["PrintInPlace", "PrintNoComments", "PrintSheetEnd", "PrintWithThreadedComments"])
+      return false unless print_comments_validator.valid?(@print_comments)
       return true
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] print_comments Object to be assigned
+    def print_comments=(print_comments)
+      validator = EnumAttributeValidator.new('String', ["PrintInPlace", "PrintNoComments", "PrintSheetEnd", "PrintWithThreadedComments"])
+      if print_comments.to_i == 0
+        unless validator.valid?(print_comments)
+          raise ArgumentError, "invalid value for 'print_comments', must be one of #{validator.allowable_values}."
+        end
+        @print_comments = print_comments
+      else
+        @print_comments = validator.allowable_values[print_comments.to_i]
+      end
     end
 
     # Checks equality by comparing each attribute.
@@ -197,7 +234,7 @@ module GroupDocsConversionCloud
           convert_range == other.convert_range &&
           skip_empty_rows_and_columns == other.skip_empty_rows_and_columns &&
           password == other.password &&
-          hide_comments == other.hide_comments
+          print_comments == other.print_comments
     end
 
     # @see the `==` method
@@ -209,7 +246,7 @@ module GroupDocsConversionCloud
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [format, default_font, font_substitutes, show_grid_lines, show_hidden_sheets, one_page_per_sheet, convert_range, skip_empty_rows_and_columns, password, hide_comments].hash
+      [format, default_font, font_substitutes, show_grid_lines, show_hidden_sheets, one_page_per_sheet, convert_range, skip_empty_rows_and_columns, password, print_comments].hash
     end
 
     # Downcases first letter.
