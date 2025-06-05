@@ -43,13 +43,13 @@ module GroupDocsConversionCloud
     # Value indicating whether built in document properties should be cleared.
     attr_accessor :clear_built_in_document_properties
 
-    # Implements GroupDocs.Conversion.Contracts.IDocumentsContainerLoadOptions.Depth     Default: 1
+    # Option to control how many levels in depth to perform conversion     Default: 1
     attr_accessor :depth
 
-    # Implements GroupDocs.Conversion.Contracts.IDocumentsContainerLoadOptions.ConvertOwned     Default is false
+    # Option to control whether the owned documents in the documents container must     be converted
     attr_accessor :convert_owned
 
-    # Implements GroupDocs.Conversion.Contracts.IDocumentsContainerLoadOptions.ConvertOwner     Default is true
+    # Option to control whether the documents container itself must be converted If     this property is true the documents container will be the first converted document     Default is true
     attr_accessor :convert_owner
 
     # Show hidden slides.
