@@ -1,5 +1,6 @@
 # GroupDocs.Conversion Cloud Ruby SDK
-Ruby gem for communicating with the GroupDocs.Conversion Cloud API
+
+This repository contains GroupDocs.Conversion Cloud SDK for Ruby source code. This SDK has been developed to help you get started with using our document conversion REST API, allowing to seamlessly convert your documents to any format you need. With this single API, you can convert back and forth between over 50 types of documents and images, including all Microsoft Office and OpenDocument file formats, PDF documents, HTML, CAD, raster images and many more.
 
 ## Installation
 
@@ -11,32 +12,72 @@ gem install groupdocs_conversion_cloud
 
 To add dependency to your app copy following into your Gemfile and run `bundle install`:
 
+```ruby
+# Load the gem
+require 'groupdocs_conversion_cloud'
 ```
-gem "groupdocs_conversion_cloud", "~> 25.6"
-```
+### Create an account
+Creating an account is very simple. Go to Dashboard to create a free account.
+We’re using Single Sign On across our websites, therefore, if you already have an account with our services, you can use it to also access the [Dashboard](https://dashboard.groupdocs.cloud).
 
-## Getting Started
+### Create an API client app
+Before you can make any requests to GroupDocs Cloud API you need to get a Client Id and a Client Secret. This will be used to invoke GroupDocs Cloud API. You can get it by creating a new [Application](https://dashboard.groupdocs.cloud/applications).
 
-Please follow the [installation](#installation) procedure and then run the following code:
+## Convert document
+
 ```ruby
 # Load the gem
 require 'groupdocs_conversion_cloud'
 
-# Get your app_sid and app_key at https://dashboard.groupdocs.cloud (free registration is required).
-app_sid = "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
-app_key = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+# Get your clientId and clientSecret at https://dashboard.groupdocs.cloud (free registration is required).
+client_id = "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
+client_secret = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
 
 # Create instance of the API class
-api = GroupDocsConversionCloud::InfoApi.from_keys(app_sid, app_key)
+apiInstance = GroupDocsConversionCloud::ConvertApi.from_keys(client_id, client_secret)
 
-# Retrieve supported converison types
-request = GroupDocsConversionCloud::GetSupportedConversionTypesRequest.new
-response = api.get_supported_conversion_types(request)
+# Prepare request
+file = File.open("myFile.docx", "r")
+request = GroupDocsConversionCloud::ConvertDocumentDirectRequest.new("pdf", file)
 
-# Print out supported conversion types
-puts("Supported file-formats:")
-response.each do |format|
-puts("#{format.source_format} to [#{format.target_formats.join(', ')}]")
+# Convert
+result = apiInstance.convert_document_direct(request)
+
+puts("Document converted: " + (result.length).to_s)
+```
+
+## Convert document using cloud storage
+
+```ruby
+# Load the gem
+require 'groupdocs_conversion_cloud'
+
+# Get your clientId and clientSecret at https://dashboard.groupdocs.cloud (free registration is required).
+client_id = "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
+client_secret = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+
+# Create instancea of the APIs
+fileApi = GroupDocsConversionCloud::FileApi.from_keys(client_id, client_secret)
+convertApi = GroupDocsConversionCloud::ConvertApi.from_keys(client_id, client_secret)
+
+# Upload file
+file = File.open("myFile.docx", "r")
+fileApi.upload_file(GroupDocsConversionCloud::UploadFileRequest.new("myFile.docx", file))
+
+# Convert
+settings = GroupDocsConversionCloud::ConvertSettings.new
+settings.file_path = "myFile.docx"
+settings.format = "pdf"
+settings.output_path = "converted"
+
+result = convertApi.convert_document(GroupDocsConversionCloud::ConvertDocumentRequest.new(settings))
+
+puts("Document converted: " + result[0].url)
+
+# Download converted file    
+response = fileApi.download_file(GroupDocsConversionCloud::DownloadFileRequest.new("converted/myFile.pdf", nil))
+puts("Expected response type is Stream: " + ($response).to_s)
+
 ```
 
 ## Licensing
