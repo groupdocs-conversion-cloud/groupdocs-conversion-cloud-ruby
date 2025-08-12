@@ -37,11 +37,14 @@ module GroupDocsConversionCloud
     # Render specific CAD layouts
     attr_accessor :layout_names
 
-    # Gets or sets a background color.
-    attr_accessor :background_color
-
-    # Gets or sets type of drawing.
+    # A type of drawing.
     attr_accessor :draw_type
+
+    # A foreground color.             
+    attr_accessor :draw_color
+
+    # A background color.
+    attr_accessor :background_color
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -69,8 +72,9 @@ module GroupDocsConversionCloud
       {
         :'format' => :'Format',
         :'layout_names' => :'LayoutNames',
-        :'background_color' => :'BackgroundColor',
-        :'draw_type' => :'DrawType'
+        :'draw_type' => :'DrawType',
+        :'draw_color' => :'DrawColor',
+        :'background_color' => :'BackgroundColor'
       }
     end
 
@@ -79,8 +83,9 @@ module GroupDocsConversionCloud
       {
         :'format' => :'String',
         :'layout_names' => :'Array<String>',
-        :'background_color' => :'String',
-        :'draw_type' => :'String'
+        :'draw_type' => :'String',
+        :'draw_color' => :'String',
+        :'background_color' => :'String'
       }
     end
 
@@ -102,12 +107,16 @@ module GroupDocsConversionCloud
         end
       end
 
-      if attributes.key?(:'BackgroundColor')
-        self.background_color = attributes[:'BackgroundColor']
-      end
-
       if attributes.key?(:'DrawType')
         self.draw_type = attributes[:'DrawType']
+      end
+
+      if attributes.key?(:'DrawColor')
+        self.draw_color = attributes[:'DrawColor']
+      end
+
+      if attributes.key?(:'BackgroundColor')
+        self.background_color = attributes[:'BackgroundColor']
       end
 
     end
@@ -153,8 +162,9 @@ module GroupDocsConversionCloud
       self.class == other.class &&
           format == other.format &&
           layout_names == other.layout_names &&
-          background_color == other.background_color &&
-          draw_type == other.draw_type
+          draw_type == other.draw_type &&
+          draw_color == other.draw_color &&
+          background_color == other.background_color
     end
 
     # @see the `==` method
@@ -166,7 +176,7 @@ module GroupDocsConversionCloud
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [format, layout_names, background_color, draw_type].hash
+      [format, layout_names, draw_type, draw_color, background_color].hash
     end
 
     # Downcases first letter.

@@ -37,14 +37,25 @@ module GroupDocsConversionCloud
     # Enable or disable generation of page numbering in converted document. Default: false
     attr_accessor :page_numbering
 
+    # The base path/url for the html
+    attr_accessor :base_path
+
     # Get or sets the encoding to be used when loading the web document. If the property is null the encoding will be determined from document character set attribute
     attr_accessor :encoding
+
+    # If true all external resource will not be loading
+    attr_accessor :skip_external_resources
 
     # Use pdf for the conversion. Default: false
     attr_accessor :use_pdf
 
     # Controls how HTML content is rendered. Default: AbsolutePositioning
     attr_accessor :rendering_mode
+    attr_accessor :zoom
+
+    # Specifies the page layout options when loading web documents
+    attr_accessor :page_layout
+    attr_accessor :custom_css_style
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -72,9 +83,14 @@ module GroupDocsConversionCloud
       {
         :'format' => :'Format',
         :'page_numbering' => :'PageNumbering',
+        :'base_path' => :'BasePath',
         :'encoding' => :'Encoding',
+        :'skip_external_resources' => :'SkipExternalResources',
         :'use_pdf' => :'UsePdf',
-        :'rendering_mode' => :'RenderingMode'
+        :'rendering_mode' => :'RenderingMode',
+        :'zoom' => :'Zoom',
+        :'page_layout' => :'PageLayout',
+        :'custom_css_style' => :'CustomCssStyle'
       }
     end
 
@@ -83,9 +99,14 @@ module GroupDocsConversionCloud
       {
         :'format' => :'String',
         :'page_numbering' => :'BOOLEAN',
+        :'base_path' => :'String',
         :'encoding' => :'String',
+        :'skip_external_resources' => :'BOOLEAN',
         :'use_pdf' => :'BOOLEAN',
-        :'rendering_mode' => :'String'
+        :'rendering_mode' => :'String',
+        :'zoom' => :'Integer',
+        :'page_layout' => :'String',
+        :'custom_css_style' => :'String'
       }
     end
 
@@ -105,8 +126,16 @@ module GroupDocsConversionCloud
         self.page_numbering = attributes[:'PageNumbering']
       end
 
+      if attributes.key?(:'BasePath')
+        self.base_path = attributes[:'BasePath']
+      end
+
       if attributes.key?(:'Encoding')
         self.encoding = attributes[:'Encoding']
+      end
+
+      if attributes.key?(:'SkipExternalResources')
+        self.skip_external_resources = attributes[:'SkipExternalResources']
       end
 
       if attributes.key?(:'UsePdf')
@@ -115,6 +144,18 @@ module GroupDocsConversionCloud
 
       if attributes.key?(:'RenderingMode')
         self.rendering_mode = attributes[:'RenderingMode']
+      end
+
+      if attributes.key?(:'Zoom')
+        self.zoom = attributes[:'Zoom']
+      end
+
+      if attributes.key?(:'PageLayout')
+        self.page_layout = attributes[:'PageLayout']
+      end
+
+      if attributes.key?(:'CustomCssStyle')
+        self.custom_css_style = attributes[:'CustomCssStyle']
       end
 
     end
@@ -127,12 +168,24 @@ module GroupDocsConversionCloud
         invalid_properties.push("invalid value for 'page_numbering', page_numbering cannot be nil.")
       end
 
+      if @skip_external_resources.nil?
+        invalid_properties.push("invalid value for 'skip_external_resources', skip_external_resources cannot be nil.")
+      end
+
       if @use_pdf.nil?
         invalid_properties.push("invalid value for 'use_pdf', use_pdf cannot be nil.")
       end
 
       if @rendering_mode.nil?
         invalid_properties.push("invalid value for 'rendering_mode', rendering_mode cannot be nil.")
+      end
+
+      if @zoom.nil?
+        invalid_properties.push("invalid value for 'zoom', zoom cannot be nil.")
+      end
+
+      if @page_layout.nil?
+        invalid_properties.push("invalid value for 'page_layout', page_layout cannot be nil.")
       end
 
       return invalid_properties
@@ -142,10 +195,15 @@ module GroupDocsConversionCloud
     # @return true if the model is valid
     def valid?
       return false if @page_numbering.nil?
+      return false if @skip_external_resources.nil?
       return false if @use_pdf.nil?
       return false if @rendering_mode.nil?
       rendering_mode_validator = EnumAttributeValidator.new('String', ["Flow", "AbsolutePositioning"])
       return false unless rendering_mode_validator.valid?(@rendering_mode)
+      return false if @zoom.nil?
+      return false if @page_layout.nil?
+      page_layout_validator = EnumAttributeValidator.new('String', ["None", "ScaleToPageWidth", "ScaleToPageHeight"])
+      return false unless page_layout_validator.valid?(@page_layout)
       return true
     end
 
@@ -163,6 +221,20 @@ module GroupDocsConversionCloud
       end
     end
 
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] page_layout Object to be assigned
+    def page_layout=(page_layout)
+      validator = EnumAttributeValidator.new('String', ["None", "ScaleToPageWidth", "ScaleToPageHeight"])
+      if page_layout.to_i == 0
+        unless validator.valid?(page_layout)
+          raise ArgumentError, "invalid value for 'page_layout', must be one of #{validator.allowable_values}."
+        end
+        @page_layout = page_layout
+      else
+        @page_layout = validator.allowable_values[page_layout.to_i]
+      end
+    end
+
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(other)
@@ -170,9 +242,14 @@ module GroupDocsConversionCloud
       self.class == other.class &&
           format == other.format &&
           page_numbering == other.page_numbering &&
+          base_path == other.base_path &&
           encoding == other.encoding &&
+          skip_external_resources == other.skip_external_resources &&
           use_pdf == other.use_pdf &&
-          rendering_mode == other.rendering_mode
+          rendering_mode == other.rendering_mode &&
+          zoom == other.zoom &&
+          page_layout == other.page_layout &&
+          custom_css_style == other.custom_css_style
     end
 
     # @see the `==` method
@@ -184,7 +261,7 @@ module GroupDocsConversionCloud
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [format, page_numbering, encoding, use_pdf, rendering_mode].hash
+      [format, page_numbering, base_path, encoding, skip_external_resources, use_pdf, rendering_mode, zoom, page_layout, custom_css_style].hash
     end
 
     # Downcases first letter.

@@ -34,46 +34,64 @@ module GroupDocsConversionCloud
     # The format of input file, (\"docx\", for example). This field must be filled with correct input file format when using ConvertDirect method, which accept input file as binary stream, and, because of that, API can correctly handle LoadOptions. In regular conversion, the input file format taken from the input file name and this field ignored.
     attr_accessor :format
 
-    # Option to display or hide the email header. Default: true
-    attr_accessor :display_header
-
-    # Option to display or hide \"from\" email address. Default: true
-    attr_accessor :display_from_email_address
-
-    # Option to display or hide \"to\" email address. Default: true
-    attr_accessor :display_to_email_address
-
-    # Option to display or hide \"Cc\" email address. Default: false
-    attr_accessor :display_cc_email_address
-
-    # Option to display or hide \"Bcc\" email address. Default: false
-    attr_accessor :display_bcc_email_address
-
-    # Gets or sets the Coordinated Universal Time (UTC) offset for the message dates. This property defines the time zone difference, between the localtime and UTC.
-    attr_accessor :time_zone_offset
-
-    # Option to convert attachments in source email or not. Default: false.
-    attr_accessor :convert_attachments
+    # Defines whether need to keep original date header string in mail message when saving or not (Default value is true)
+    attr_accessor :preserve_original_date
 
     # The mapping between email message field and field text representation
     attr_accessor :field_labels
 
-    # Defines whether need to keep original date header string in mail message when saving or not (Default value is true)
-    attr_accessor :preserve_original_date
+    # Gets or sets the Coordinated Universal Time (UTC) offset for the message dates. This property defines the time zone difference, between the localtime and UTC.
+    attr_accessor :time_zone_offset
+
+    # Option to display or hide sent date/time in the header. Default: true.
+    attr_accessor :display_sent
+
+    # Option to display or hide subject in the header. Default: true.
+    attr_accessor :display_subject
+
+    # Option to display or hide attachments in the header. Default: true.
+    attr_accessor :display_attachments
+    attr_accessor :display_email_addresses
+
+    # Option to display or hide \"Bcc\" email address. Default: false
+    attr_accessor :display_bcc_email_address
+
+    # Option to display or hide \"Cc\" email address. Default: false
+    attr_accessor :display_cc_email_address
+
+    # Option to display or hide \"to\" email address. Default: true
+    attr_accessor :display_to_email_address
+
+    # Option to display or hide \"from\" email address. Default: true
+    attr_accessor :display_from_email_address
+
+    # Option to display or hide the email header. Default: true
+    attr_accessor :display_header
+
+    # Default font for Email document. The following font will be used if a font is missing.
+    attr_accessor :default_font
+
+    # List of font substitutes.
+    attr_accessor :font_substitutes
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'format' => :'Format',
-        :'display_header' => :'DisplayHeader',
-        :'display_from_email_address' => :'DisplayFromEmailAddress',
-        :'display_to_email_address' => :'DisplayToEmailAddress',
-        :'display_cc_email_address' => :'DisplayCcEmailAddress',
-        :'display_bcc_email_address' => :'DisplayBccEmailAddress',
-        :'time_zone_offset' => :'TimeZoneOffset',
-        :'convert_attachments' => :'ConvertAttachments',
+        :'preserve_original_date' => :'PreserveOriginalDate',
         :'field_labels' => :'FieldLabels',
-        :'preserve_original_date' => :'PreserveOriginalDate'
+        :'time_zone_offset' => :'TimeZoneOffset',
+        :'display_sent' => :'DisplaySent',
+        :'display_subject' => :'DisplaySubject',
+        :'display_attachments' => :'DisplayAttachments',
+        :'display_email_addresses' => :'DisplayEmailAddresses',
+        :'display_bcc_email_address' => :'DisplayBccEmailAddress',
+        :'display_cc_email_address' => :'DisplayCcEmailAddress',
+        :'display_to_email_address' => :'DisplayToEmailAddress',
+        :'display_from_email_address' => :'DisplayFromEmailAddress',
+        :'display_header' => :'DisplayHeader',
+        :'default_font' => :'DefaultFont',
+        :'font_substitutes' => :'FontSubstitutes'
       }
     end
 
@@ -81,15 +99,20 @@ module GroupDocsConversionCloud
     def self.swagger_types
       {
         :'format' => :'String',
-        :'display_header' => :'BOOLEAN',
-        :'display_from_email_address' => :'BOOLEAN',
-        :'display_to_email_address' => :'BOOLEAN',
-        :'display_cc_email_address' => :'BOOLEAN',
-        :'display_bcc_email_address' => :'BOOLEAN',
-        :'time_zone_offset' => :'String',
-        :'convert_attachments' => :'BOOLEAN',
+        :'preserve_original_date' => :'BOOLEAN',
         :'field_labels' => :'Array<FieldLabel>',
-        :'preserve_original_date' => :'BOOLEAN'
+        :'time_zone_offset' => :'String',
+        :'display_sent' => :'BOOLEAN',
+        :'display_subject' => :'BOOLEAN',
+        :'display_attachments' => :'BOOLEAN',
+        :'display_email_addresses' => :'BOOLEAN',
+        :'display_bcc_email_address' => :'BOOLEAN',
+        :'display_cc_email_address' => :'BOOLEAN',
+        :'display_to_email_address' => :'BOOLEAN',
+        :'display_from_email_address' => :'BOOLEAN',
+        :'display_header' => :'BOOLEAN',
+        :'default_font' => :'String',
+        :'font_substitutes' => :'Hash<String, String>'
       }
     end
 
@@ -105,32 +128,8 @@ module GroupDocsConversionCloud
         self.format = attributes[:'Format']
       end
 
-      if attributes.key?(:'DisplayHeader')
-        self.display_header = attributes[:'DisplayHeader']
-      end
-
-      if attributes.key?(:'DisplayFromEmailAddress')
-        self.display_from_email_address = attributes[:'DisplayFromEmailAddress']
-      end
-
-      if attributes.key?(:'DisplayToEmailAddress')
-        self.display_to_email_address = attributes[:'DisplayToEmailAddress']
-      end
-
-      if attributes.key?(:'DisplayCcEmailAddress')
-        self.display_cc_email_address = attributes[:'DisplayCcEmailAddress']
-      end
-
-      if attributes.key?(:'DisplayBccEmailAddress')
-        self.display_bcc_email_address = attributes[:'DisplayBccEmailAddress']
-      end
-
-      if attributes.key?(:'TimeZoneOffset')
-        self.time_zone_offset = attributes[:'TimeZoneOffset']
-      end
-
-      if attributes.key?(:'ConvertAttachments')
-        self.convert_attachments = attributes[:'ConvertAttachments']
+      if attributes.key?(:'PreserveOriginalDate')
+        self.preserve_original_date = attributes[:'PreserveOriginalDate']
       end
 
       if attributes.key?(:'FieldLabels')
@@ -139,8 +138,54 @@ module GroupDocsConversionCloud
         end
       end
 
-      if attributes.key?(:'PreserveOriginalDate')
-        self.preserve_original_date = attributes[:'PreserveOriginalDate']
+      if attributes.key?(:'TimeZoneOffset')
+        self.time_zone_offset = attributes[:'TimeZoneOffset']
+      end
+
+      if attributes.key?(:'DisplaySent')
+        self.display_sent = attributes[:'DisplaySent']
+      end
+
+      if attributes.key?(:'DisplaySubject')
+        self.display_subject = attributes[:'DisplaySubject']
+      end
+
+      if attributes.key?(:'DisplayAttachments')
+        self.display_attachments = attributes[:'DisplayAttachments']
+      end
+
+      if attributes.key?(:'DisplayEmailAddresses')
+        self.display_email_addresses = attributes[:'DisplayEmailAddresses']
+      end
+
+      if attributes.key?(:'DisplayBccEmailAddress')
+        self.display_bcc_email_address = attributes[:'DisplayBccEmailAddress']
+      end
+
+      if attributes.key?(:'DisplayCcEmailAddress')
+        self.display_cc_email_address = attributes[:'DisplayCcEmailAddress']
+      end
+
+      if attributes.key?(:'DisplayToEmailAddress')
+        self.display_to_email_address = attributes[:'DisplayToEmailAddress']
+      end
+
+      if attributes.key?(:'DisplayFromEmailAddress')
+        self.display_from_email_address = attributes[:'DisplayFromEmailAddress']
+      end
+
+      if attributes.key?(:'DisplayHeader')
+        self.display_header = attributes[:'DisplayHeader']
+      end
+
+      if attributes.key?(:'DefaultFont')
+        self.default_font = attributes[:'DefaultFont']
+      end
+
+      if attributes.key?(:'FontSubstitutes')
+        if (value = attributes[:'FontSubstitutes']).is_a?(Hash)
+          self.font_substitutes = value
+        end
       end
 
     end
@@ -149,32 +194,44 @@ module GroupDocsConversionCloud
     # @return Array for valid properies with the reasons
     def list_invalid_properties
       invalid_properties = []
-      if @display_header.nil?
-        invalid_properties.push("invalid value for 'display_header', display_header cannot be nil.")
+      if @preserve_original_date.nil?
+        invalid_properties.push("invalid value for 'preserve_original_date', preserve_original_date cannot be nil.")
       end
 
-      if @display_from_email_address.nil?
-        invalid_properties.push("invalid value for 'display_from_email_address', display_from_email_address cannot be nil.")
+      if @display_sent.nil?
+        invalid_properties.push("invalid value for 'display_sent', display_sent cannot be nil.")
       end
 
-      if @display_to_email_address.nil?
-        invalid_properties.push("invalid value for 'display_to_email_address', display_to_email_address cannot be nil.")
+      if @display_subject.nil?
+        invalid_properties.push("invalid value for 'display_subject', display_subject cannot be nil.")
       end
 
-      if @display_cc_email_address.nil?
-        invalid_properties.push("invalid value for 'display_cc_email_address', display_cc_email_address cannot be nil.")
+      if @display_attachments.nil?
+        invalid_properties.push("invalid value for 'display_attachments', display_attachments cannot be nil.")
+      end
+
+      if @display_email_addresses.nil?
+        invalid_properties.push("invalid value for 'display_email_addresses', display_email_addresses cannot be nil.")
       end
 
       if @display_bcc_email_address.nil?
         invalid_properties.push("invalid value for 'display_bcc_email_address', display_bcc_email_address cannot be nil.")
       end
 
-      if @convert_attachments.nil?
-        invalid_properties.push("invalid value for 'convert_attachments', convert_attachments cannot be nil.")
+      if @display_cc_email_address.nil?
+        invalid_properties.push("invalid value for 'display_cc_email_address', display_cc_email_address cannot be nil.")
       end
 
-      if @preserve_original_date.nil?
-        invalid_properties.push("invalid value for 'preserve_original_date', preserve_original_date cannot be nil.")
+      if @display_to_email_address.nil?
+        invalid_properties.push("invalid value for 'display_to_email_address', display_to_email_address cannot be nil.")
+      end
+
+      if @display_from_email_address.nil?
+        invalid_properties.push("invalid value for 'display_from_email_address', display_from_email_address cannot be nil.")
+      end
+
+      if @display_header.nil?
+        invalid_properties.push("invalid value for 'display_header', display_header cannot be nil.")
       end
 
       return invalid_properties
@@ -183,13 +240,16 @@ module GroupDocsConversionCloud
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @display_header.nil?
-      return false if @display_from_email_address.nil?
-      return false if @display_to_email_address.nil?
-      return false if @display_cc_email_address.nil?
-      return false if @display_bcc_email_address.nil?
-      return false if @convert_attachments.nil?
       return false if @preserve_original_date.nil?
+      return false if @display_sent.nil?
+      return false if @display_subject.nil?
+      return false if @display_attachments.nil?
+      return false if @display_email_addresses.nil?
+      return false if @display_bcc_email_address.nil?
+      return false if @display_cc_email_address.nil?
+      return false if @display_to_email_address.nil?
+      return false if @display_from_email_address.nil?
+      return false if @display_header.nil?
       return true
     end
 
@@ -199,15 +259,20 @@ module GroupDocsConversionCloud
       return true if self.equal?(other)
       self.class == other.class &&
           format == other.format &&
-          display_header == other.display_header &&
-          display_from_email_address == other.display_from_email_address &&
-          display_to_email_address == other.display_to_email_address &&
-          display_cc_email_address == other.display_cc_email_address &&
-          display_bcc_email_address == other.display_bcc_email_address &&
-          time_zone_offset == other.time_zone_offset &&
-          convert_attachments == other.convert_attachments &&
+          preserve_original_date == other.preserve_original_date &&
           field_labels == other.field_labels &&
-          preserve_original_date == other.preserve_original_date
+          time_zone_offset == other.time_zone_offset &&
+          display_sent == other.display_sent &&
+          display_subject == other.display_subject &&
+          display_attachments == other.display_attachments &&
+          display_email_addresses == other.display_email_addresses &&
+          display_bcc_email_address == other.display_bcc_email_address &&
+          display_cc_email_address == other.display_cc_email_address &&
+          display_to_email_address == other.display_to_email_address &&
+          display_from_email_address == other.display_from_email_address &&
+          display_header == other.display_header &&
+          default_font == other.default_font &&
+          font_substitutes == other.font_substitutes
     end
 
     # @see the `==` method
@@ -219,7 +284,7 @@ module GroupDocsConversionCloud
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [format, display_header, display_from_email_address, display_to_email_address, display_cc_email_address, display_bcc_email_address, time_zone_offset, convert_attachments, field_labels, preserve_original_date].hash
+      [format, preserve_original_date, field_labels, time_zone_offset, display_sent, display_subject, display_attachments, display_email_addresses, display_bcc_email_address, display_cc_email_address, display_to_email_address, display_from_email_address, display_header, default_font, font_substitutes].hash
     end
 
     # Downcases first letter.

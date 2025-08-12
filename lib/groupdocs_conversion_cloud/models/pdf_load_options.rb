@@ -34,26 +34,50 @@ module GroupDocsConversionCloud
     # The format of input file, (\"docx\", for example). This field must be filled with correct input file format when using ConvertDirect method, which accept input file as binary stream, and, because of that, API can correctly handle LoadOptions. In regular conversion, the input file format taken from the input file name and this field ignored.
     attr_accessor :format
 
-    # Remove embedded files
-    attr_accessor :remove_embedded_files
+    # Clear built-in document properties
+    attr_accessor :clear_built_in_document_properties
 
-    # Set password to unprotect protected document
-    attr_accessor :password
+    # Clear custom document properties
+    attr_accessor :clear_custom_document_properties
+
+    # Enable or disable generation of page numbering in converted document. Default:     false
+    attr_accessor :page_numbering
+
+    # Flatten all the fields of the PDF form
+    attr_accessor :flatten_all_fields
 
     # Hide annotations in Pdf documents
     attr_accessor :hide_pdf_annotations
 
-    # Flatten all the fields of the PDF form
-    attr_accessor :flatten_all_fields
+    # Default font for Pdf document. The following font will be used if a font is missing.
+    attr_accessor :default_font
+
+    # Set password to unprotect protected document
+    attr_accessor :password
+
+    # Remove javascript
+    attr_accessor :remove_javascript
+
+    # Remove embedded files
+    attr_accessor :remove_embedded_files
+
+    # Substitute specific fonts when converting Words document.
+    attr_accessor :font_substitutes
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'format' => :'Format',
-        :'remove_embedded_files' => :'RemoveEmbeddedFiles',
-        :'password' => :'Password',
+        :'clear_built_in_document_properties' => :'ClearBuiltInDocumentProperties',
+        :'clear_custom_document_properties' => :'ClearCustomDocumentProperties',
+        :'page_numbering' => :'PageNumbering',
+        :'flatten_all_fields' => :'FlattenAllFields',
         :'hide_pdf_annotations' => :'HidePdfAnnotations',
-        :'flatten_all_fields' => :'FlattenAllFields'
+        :'default_font' => :'DefaultFont',
+        :'password' => :'Password',
+        :'remove_javascript' => :'RemoveJavascript',
+        :'remove_embedded_files' => :'RemoveEmbeddedFiles',
+        :'font_substitutes' => :'FontSubstitutes'
       }
     end
 
@@ -61,10 +85,16 @@ module GroupDocsConversionCloud
     def self.swagger_types
       {
         :'format' => :'String',
-        :'remove_embedded_files' => :'BOOLEAN',
-        :'password' => :'String',
+        :'clear_built_in_document_properties' => :'BOOLEAN',
+        :'clear_custom_document_properties' => :'BOOLEAN',
+        :'page_numbering' => :'BOOLEAN',
+        :'flatten_all_fields' => :'BOOLEAN',
         :'hide_pdf_annotations' => :'BOOLEAN',
-        :'flatten_all_fields' => :'BOOLEAN'
+        :'default_font' => :'String',
+        :'password' => :'String',
+        :'remove_javascript' => :'BOOLEAN',
+        :'remove_embedded_files' => :'BOOLEAN',
+        :'font_substitutes' => :'Hash<String, String>'
       }
     end
 
@@ -80,20 +110,46 @@ module GroupDocsConversionCloud
         self.format = attributes[:'Format']
       end
 
-      if attributes.key?(:'RemoveEmbeddedFiles')
-        self.remove_embedded_files = attributes[:'RemoveEmbeddedFiles']
+      if attributes.key?(:'ClearBuiltInDocumentProperties')
+        self.clear_built_in_document_properties = attributes[:'ClearBuiltInDocumentProperties']
       end
 
-      if attributes.key?(:'Password')
-        self.password = attributes[:'Password']
+      if attributes.key?(:'ClearCustomDocumentProperties')
+        self.clear_custom_document_properties = attributes[:'ClearCustomDocumentProperties']
+      end
+
+      if attributes.key?(:'PageNumbering')
+        self.page_numbering = attributes[:'PageNumbering']
+      end
+
+      if attributes.key?(:'FlattenAllFields')
+        self.flatten_all_fields = attributes[:'FlattenAllFields']
       end
 
       if attributes.key?(:'HidePdfAnnotations')
         self.hide_pdf_annotations = attributes[:'HidePdfAnnotations']
       end
 
-      if attributes.key?(:'FlattenAllFields')
-        self.flatten_all_fields = attributes[:'FlattenAllFields']
+      if attributes.key?(:'DefaultFont')
+        self.default_font = attributes[:'DefaultFont']
+      end
+
+      if attributes.key?(:'Password')
+        self.password = attributes[:'Password']
+      end
+
+      if attributes.key?(:'RemoveJavascript')
+        self.remove_javascript = attributes[:'RemoveJavascript']
+      end
+
+      if attributes.key?(:'RemoveEmbeddedFiles')
+        self.remove_embedded_files = attributes[:'RemoveEmbeddedFiles']
+      end
+
+      if attributes.key?(:'FontSubstitutes')
+        if (value = attributes[:'FontSubstitutes']).is_a?(Hash)
+          self.font_substitutes = value
+        end
       end
 
     end
@@ -102,16 +158,32 @@ module GroupDocsConversionCloud
     # @return Array for valid properies with the reasons
     def list_invalid_properties
       invalid_properties = []
-      if @remove_embedded_files.nil?
-        invalid_properties.push("invalid value for 'remove_embedded_files', remove_embedded_files cannot be nil.")
+      if @clear_built_in_document_properties.nil?
+        invalid_properties.push("invalid value for 'clear_built_in_document_properties', clear_built_in_document_properties cannot be nil.")
+      end
+
+      if @clear_custom_document_properties.nil?
+        invalid_properties.push("invalid value for 'clear_custom_document_properties', clear_custom_document_properties cannot be nil.")
+      end
+
+      if @page_numbering.nil?
+        invalid_properties.push("invalid value for 'page_numbering', page_numbering cannot be nil.")
+      end
+
+      if @flatten_all_fields.nil?
+        invalid_properties.push("invalid value for 'flatten_all_fields', flatten_all_fields cannot be nil.")
       end
 
       if @hide_pdf_annotations.nil?
         invalid_properties.push("invalid value for 'hide_pdf_annotations', hide_pdf_annotations cannot be nil.")
       end
 
-      if @flatten_all_fields.nil?
-        invalid_properties.push("invalid value for 'flatten_all_fields', flatten_all_fields cannot be nil.")
+      if @remove_javascript.nil?
+        invalid_properties.push("invalid value for 'remove_javascript', remove_javascript cannot be nil.")
+      end
+
+      if @remove_embedded_files.nil?
+        invalid_properties.push("invalid value for 'remove_embedded_files', remove_embedded_files cannot be nil.")
       end
 
       return invalid_properties
@@ -120,9 +192,13 @@ module GroupDocsConversionCloud
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @remove_embedded_files.nil?
-      return false if @hide_pdf_annotations.nil?
+      return false if @clear_built_in_document_properties.nil?
+      return false if @clear_custom_document_properties.nil?
+      return false if @page_numbering.nil?
       return false if @flatten_all_fields.nil?
+      return false if @hide_pdf_annotations.nil?
+      return false if @remove_javascript.nil?
+      return false if @remove_embedded_files.nil?
       return true
     end
 
@@ -132,10 +208,16 @@ module GroupDocsConversionCloud
       return true if self.equal?(other)
       self.class == other.class &&
           format == other.format &&
-          remove_embedded_files == other.remove_embedded_files &&
-          password == other.password &&
+          clear_built_in_document_properties == other.clear_built_in_document_properties &&
+          clear_custom_document_properties == other.clear_custom_document_properties &&
+          page_numbering == other.page_numbering &&
+          flatten_all_fields == other.flatten_all_fields &&
           hide_pdf_annotations == other.hide_pdf_annotations &&
-          flatten_all_fields == other.flatten_all_fields
+          default_font == other.default_font &&
+          password == other.password &&
+          remove_javascript == other.remove_javascript &&
+          remove_embedded_files == other.remove_embedded_files &&
+          font_substitutes == other.font_substitutes
     end
 
     # @see the `==` method
@@ -147,7 +229,7 @@ module GroupDocsConversionCloud
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [format, remove_embedded_files, password, hide_pdf_annotations, flatten_all_fields].hash
+      [format, clear_built_in_document_properties, clear_custom_document_properties, page_numbering, flatten_all_fields, hide_pdf_annotations, default_font, password, remove_javascript, remove_embedded_files, font_substitutes].hash
     end
 
     # Downcases first letter.
