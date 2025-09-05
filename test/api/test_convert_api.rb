@@ -76,7 +76,7 @@ module GroupDocsConversionCloud
       format = "pdf"      
       file = File.open(get_test_path() + test_file.path, "r")
 
-      load_options = DocxLoadOptions.new
+      load_options = WordProcessingLoadOptions.new
       load_options.format = "docx"
       load_options.password = test_file.password
 
