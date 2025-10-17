@@ -1,6 +1,6 @@
  #
  # --------------------------------------------------------------------------------------------------------------------
- # <copyright company="Aspose Pty Ltd" file="one_load_options.rb">
+ # <copyright company="Aspose Pty Ltd" file="compression_load_options.rb">
  #   Copyright (c) Aspose Pty Ltd
  # </copyright>
  # <summary>
@@ -28,27 +28,19 @@
 require 'date'
 
 module GroupDocsConversionCloud
-  # One document load options
-  class OneLoadOptions
+  # Options for loading compression documents
+  class CompressionLoadOptions
 
     # The format of input file, (\"docx\", for example). This field must be filled with correct input file format when using ConvertDirect method, which accept input file as binary stream, and, because of that, API can correctly handle LoadOptions. In regular conversion, the input file format taken from the input file name and this field ignored.
     attr_accessor :format
 
-    # Default font for Note document. The following font will be used if a font is missing.
-    attr_accessor :default_font
-
-    # Substitute specific fonts when converting Note document.
-    attr_accessor :font_substitutes
-
-    # Set password to unprotect protected document
+    # Set password to load protected document.
     attr_accessor :password
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'format' => :'Format',
-        :'default_font' => :'DefaultFont',
-        :'font_substitutes' => :'FontSubstitutes',
         :'password' => :'Password'
       }
     end
@@ -57,8 +49,6 @@ module GroupDocsConversionCloud
     def self.swagger_types
       {
         :'format' => :'String',
-        :'default_font' => :'String',
-        :'font_substitutes' => :'Hash<String, String>',
         :'password' => :'String'
       }
     end
@@ -73,16 +63,6 @@ module GroupDocsConversionCloud
 
       if attributes.key?(:'Format')
         self.format = attributes[:'Format']
-      end
-
-      if attributes.key?(:'DefaultFont')
-        self.default_font = attributes[:'DefaultFont']
-      end
-
-      if attributes.key?(:'FontSubstitutes')
-        if (value = attributes[:'FontSubstitutes']).is_a?(Hash)
-          self.font_substitutes = value
-        end
       end
 
       if attributes.key?(:'Password')
@@ -110,8 +90,6 @@ module GroupDocsConversionCloud
       return true if self.equal?(other)
       self.class == other.class &&
           format == other.format &&
-          default_font == other.default_font &&
-          font_substitutes == other.font_substitutes &&
           password == other.password
     end
 
@@ -124,7 +102,7 @@ module GroupDocsConversionCloud
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [format, default_font, font_substitutes, password].hash
+      [format, password].hash
     end
 
     # Downcases first letter.
