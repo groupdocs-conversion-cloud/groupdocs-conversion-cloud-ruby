@@ -66,7 +66,7 @@ module GroupDocsConversionCloud
       end
 
       def get_test_path
-        "test\\test_files\\"
+        "test/test_files/"
       end
 
       def upload_test_files

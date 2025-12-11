@@ -28,7 +28,7 @@
 require 'date'
 
 module GroupDocsConversionCloud
-  # Page description langusge convert options
+  # Page description language convert options
   class PDLConvertOptions
 
     # Start conversion from FromPage page
@@ -43,13 +43,21 @@ module GroupDocsConversionCloud
     # Watermark specific options
     attr_accessor :watermark_options
 
+    # Desired page width after conversion.
+    attr_accessor :width
+
+    # Desired page height after conversion.
+    attr_accessor :height
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'from_page' => :'FromPage',
         :'pages_count' => :'PagesCount',
         :'pages' => :'Pages',
-        :'watermark_options' => :'WatermarkOptions'
+        :'watermark_options' => :'WatermarkOptions',
+        :'width' => :'Width',
+        :'height' => :'Height'
       }
     end
 
@@ -59,7 +67,9 @@ module GroupDocsConversionCloud
         :'from_page' => :'Integer',
         :'pages_count' => :'Integer',
         :'pages' => :'Array<Integer>',
-        :'watermark_options' => :'WatermarkOptions'
+        :'watermark_options' => :'WatermarkOptions',
+        :'width' => :'Integer',
+        :'height' => :'Integer'
       }
     end
 
@@ -89,6 +99,14 @@ module GroupDocsConversionCloud
         self.watermark_options = attributes[:'WatermarkOptions']
       end
 
+      if attributes.key?(:'Width')
+        self.width = attributes[:'Width']
+      end
+
+      if attributes.key?(:'Height')
+        self.height = attributes[:'Height']
+      end
+
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -103,6 +121,14 @@ module GroupDocsConversionCloud
         invalid_properties.push("invalid value for 'pages_count', pages_count cannot be nil.")
       end
 
+      if @width.nil?
+        invalid_properties.push("invalid value for 'width', width cannot be nil.")
+      end
+
+      if @height.nil?
+        invalid_properties.push("invalid value for 'height', height cannot be nil.")
+      end
+
       return invalid_properties
     end
 
@@ -111,6 +137,8 @@ module GroupDocsConversionCloud
     def valid?
       return false if @from_page.nil?
       return false if @pages_count.nil?
+      return false if @width.nil?
+      return false if @height.nil?
       return true
     end
 
@@ -122,7 +150,9 @@ module GroupDocsConversionCloud
           from_page == other.from_page &&
           pages_count == other.pages_count &&
           pages == other.pages &&
-          watermark_options == other.watermark_options
+          watermark_options == other.watermark_options &&
+          width == other.width &&
+          height == other.height
     end
 
     # @see the `==` method
@@ -134,7 +164,7 @@ module GroupDocsConversionCloud
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [from_page, pages_count, pages, watermark_options].hash
+      [from_page, pages_count, pages, watermark_options, width, height].hash
     end
 
     # Downcases first letter.

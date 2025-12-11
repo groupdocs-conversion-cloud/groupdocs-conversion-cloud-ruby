@@ -45,21 +45,21 @@ module GroupDocsConversionCloud
         def self.one_page_docx
             f = TestFile.new
             f.file_name = "one-page.docx"
-            f.folder = "WordProcessing\\"
+            f.folder = "WordProcessing/"
             f
         end
 
         def self.not_exist
             f = TestFile.new
             f.file_name = "notexist.docx"
-            f.folder = "some-folder\\"
+            f.folder = "some-folder/"
             f
         end
 
         def self.password_protected_docx
             f = TestFile.new
             f.file_name = "password-protected.docx"
-            f.folder = "WordProcessing\\"
+            f.folder = "WordProcessing/"
             f.password = "password"
             f
         end        
@@ -67,7 +67,7 @@ module GroupDocsConversionCloud
         def self.four_pages_docx
             f = TestFile.new
             f.file_name = "four-pages.docx"
-            f.folder = "WordProcessing\\"
+            f.folder = "WordProcessing/"
             f
         end
 

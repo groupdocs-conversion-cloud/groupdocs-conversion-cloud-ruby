@@ -1,6 +1,6 @@
  #
  # --------------------------------------------------------------------------------------------------------------------
- # <copyright company="Aspose Pty Ltd" file="xls2003_convert_options.rb">
+ # <copyright company="Aspose Pty Ltd" file="email_convert_options.rb">
  #   Copyright (c) Aspose Pty Ltd
  # </copyright>
  # <summary>
@@ -28,8 +28,8 @@
 require 'date'
 
 module GroupDocsConversionCloud
-  # Xls2003 convert options
-  class Xls2003ConvertOptions
+  # Options for to Email conversion
+  class EmailConvertOptions
 
     # Start conversion from FromPage page
     attr_accessor :from_page
@@ -43,25 +43,13 @@ module GroupDocsConversionCloud
     # Watermark specific options
     attr_accessor :watermark_options
 
-    # Set this property if you want to protect the converted document with a password
-    attr_accessor :password
-
-    # Specifies the zoom level in percentage. Default is 100.
-    attr_accessor :zoom
-
-    # If true, the input firstly is converted to PDF and after that to desired format
-    attr_accessor :use_pdf
-
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'from_page' => :'FromPage',
         :'pages_count' => :'PagesCount',
         :'pages' => :'Pages',
-        :'watermark_options' => :'WatermarkOptions',
-        :'password' => :'Password',
-        :'zoom' => :'Zoom',
-        :'use_pdf' => :'UsePdf'
+        :'watermark_options' => :'WatermarkOptions'
       }
     end
 
@@ -71,10 +59,7 @@ module GroupDocsConversionCloud
         :'from_page' => :'Integer',
         :'pages_count' => :'Integer',
         :'pages' => :'Array<Integer>',
-        :'watermark_options' => :'WatermarkOptions',
-        :'password' => :'String',
-        :'zoom' => :'Integer',
-        :'use_pdf' => :'BOOLEAN'
+        :'watermark_options' => :'WatermarkOptions'
       }
     end
 
@@ -104,18 +89,6 @@ module GroupDocsConversionCloud
         self.watermark_options = attributes[:'WatermarkOptions']
       end
 
-      if attributes.key?(:'Password')
-        self.password = attributes[:'Password']
-      end
-
-      if attributes.key?(:'Zoom')
-        self.zoom = attributes[:'Zoom']
-      end
-
-      if attributes.key?(:'UsePdf')
-        self.use_pdf = attributes[:'UsePdf']
-      end
-
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -130,14 +103,6 @@ module GroupDocsConversionCloud
         invalid_properties.push("invalid value for 'pages_count', pages_count cannot be nil.")
       end
 
-      if @zoom.nil?
-        invalid_properties.push("invalid value for 'zoom', zoom cannot be nil.")
-      end
-
-      if @use_pdf.nil?
-        invalid_properties.push("invalid value for 'use_pdf', use_pdf cannot be nil.")
-      end
-
       return invalid_properties
     end
 
@@ -146,8 +111,6 @@ module GroupDocsConversionCloud
     def valid?
       return false if @from_page.nil?
       return false if @pages_count.nil?
-      return false if @zoom.nil?
-      return false if @use_pdf.nil?
       return true
     end
 
@@ -159,10 +122,7 @@ module GroupDocsConversionCloud
           from_page == other.from_page &&
           pages_count == other.pages_count &&
           pages == other.pages &&
-          watermark_options == other.watermark_options &&
-          password == other.password &&
-          zoom == other.zoom &&
-          use_pdf == other.use_pdf
+          watermark_options == other.watermark_options
     end
 
     # @see the `==` method
@@ -174,7 +134,7 @@ module GroupDocsConversionCloud
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [from_page, pages_count, pages, watermark_options, password, zoom, use_pdf].hash
+      [from_page, pages_count, pages, watermark_options].hash
     end
 
     # Downcases first letter.

@@ -1,6 +1,6 @@
  #
  # --------------------------------------------------------------------------------------------------------------------
- # <copyright company="Aspose Pty Ltd" file="otp_convert_options.rb">
+ # <copyright company="Aspose Pty Ltd" file="gis_convert_options.rb">
  #   Copyright (c) Aspose Pty Ltd
  # </copyright>
  # <summary>
@@ -28,8 +28,8 @@
 require 'date'
 
 module GroupDocsConversionCloud
-  # Otp convert options
-  class OtpConvertOptions
+  # Options for to Gis conversion
+  class GisConvertOptions
 
     # Start conversion from FromPage page
     attr_accessor :from_page
@@ -43,21 +43,13 @@ module GroupDocsConversionCloud
     # Watermark specific options
     attr_accessor :watermark_options
 
-    # Set this property if you want to protect the converted document with a password
-    attr_accessor :password
-
-    # Specifies the zoom level in percentage. Default is 100. Default zoom is supported till Microsoft Powerpoint 2010. Starting from Microsoft Powerpoint 2013 default zoom is no longer set to document, instead it appears to use the zoom factor of the last document that was opened.
-    attr_accessor :zoom
-
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'from_page' => :'FromPage',
         :'pages_count' => :'PagesCount',
         :'pages' => :'Pages',
-        :'watermark_options' => :'WatermarkOptions',
-        :'password' => :'Password',
-        :'zoom' => :'Zoom'
+        :'watermark_options' => :'WatermarkOptions'
       }
     end
 
@@ -67,9 +59,7 @@ module GroupDocsConversionCloud
         :'from_page' => :'Integer',
         :'pages_count' => :'Integer',
         :'pages' => :'Array<Integer>',
-        :'watermark_options' => :'WatermarkOptions',
-        :'password' => :'String',
-        :'zoom' => :'Integer'
+        :'watermark_options' => :'WatermarkOptions'
       }
     end
 
@@ -99,14 +89,6 @@ module GroupDocsConversionCloud
         self.watermark_options = attributes[:'WatermarkOptions']
       end
 
-      if attributes.key?(:'Password')
-        self.password = attributes[:'Password']
-      end
-
-      if attributes.key?(:'Zoom')
-        self.zoom = attributes[:'Zoom']
-      end
-
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -121,10 +103,6 @@ module GroupDocsConversionCloud
         invalid_properties.push("invalid value for 'pages_count', pages_count cannot be nil.")
       end
 
-      if @zoom.nil?
-        invalid_properties.push("invalid value for 'zoom', zoom cannot be nil.")
-      end
-
       return invalid_properties
     end
 
@@ -133,7 +111,6 @@ module GroupDocsConversionCloud
     def valid?
       return false if @from_page.nil?
       return false if @pages_count.nil?
-      return false if @zoom.nil?
       return true
     end
 
@@ -145,9 +122,7 @@ module GroupDocsConversionCloud
           from_page == other.from_page &&
           pages_count == other.pages_count &&
           pages == other.pages &&
-          watermark_options == other.watermark_options &&
-          password == other.password &&
-          zoom == other.zoom
+          watermark_options == other.watermark_options
     end
 
     # @see the `==` method
@@ -159,7 +134,7 @@ module GroupDocsConversionCloud
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [from_page, pages_count, pages, watermark_options, password, zoom].hash
+      [from_page, pages_count, pages, watermark_options].hash
     end
 
     # Downcases first letter.

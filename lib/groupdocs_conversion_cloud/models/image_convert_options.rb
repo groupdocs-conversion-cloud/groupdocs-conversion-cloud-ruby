@@ -78,6 +78,18 @@ module GroupDocsConversionCloud
 
     # Gets or sets a background color.
     attr_accessor :background_color
+
+    # Options for converting to Jpeg-compatible image
+    attr_accessor :jpeg_options
+
+    # Options for converting to PSD-compatible image
+    attr_accessor :psd_options
+
+    # Options for converting to Tiff-compatible image
+    attr_accessor :tiff_options
+
+    # Options for converting to WebP-compatible image
+    attr_accessor :webp_options
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -118,7 +130,11 @@ module GroupDocsConversionCloud
         :'contrast' => :'Contrast',
         :'gamma' => :'Gamma',
         :'flip_mode' => :'FlipMode',
-        :'background_color' => :'BackgroundColor'
+        :'background_color' => :'BackgroundColor',
+        :'jpeg_options' => :'JpegOptions',
+        :'psd_options' => :'PsdOptions',
+        :'tiff_options' => :'TiffOptions',
+        :'webp_options' => :'WebpOptions'
       }
     end
 
@@ -140,7 +156,11 @@ module GroupDocsConversionCloud
         :'contrast' => :'Integer',
         :'gamma' => :'Float',
         :'flip_mode' => :'String',
-        :'background_color' => :'String'
+        :'background_color' => :'String',
+        :'jpeg_options' => :'JpgConvertOptions',
+        :'psd_options' => :'PsdConvertOptions',
+        :'tiff_options' => :'TiffConvertOptions',
+        :'webp_options' => :'WebpConvertOptions'
       }
     end
 
@@ -216,6 +236,22 @@ module GroupDocsConversionCloud
 
       if attributes.key?(:'BackgroundColor')
         self.background_color = attributes[:'BackgroundColor']
+      end
+
+      if attributes.key?(:'JpegOptions')
+        self.jpeg_options = attributes[:'JpegOptions']
+      end
+
+      if attributes.key?(:'PsdOptions')
+        self.psd_options = attributes[:'PsdOptions']
+      end
+
+      if attributes.key?(:'TiffOptions')
+        self.tiff_options = attributes[:'TiffOptions']
+      end
+
+      if attributes.key?(:'WebpOptions')
+        self.webp_options = attributes[:'WebpOptions']
       end
 
     end
@@ -334,7 +370,11 @@ module GroupDocsConversionCloud
           contrast == other.contrast &&
           gamma == other.gamma &&
           flip_mode == other.flip_mode &&
-          background_color == other.background_color
+          background_color == other.background_color &&
+          jpeg_options == other.jpeg_options &&
+          psd_options == other.psd_options &&
+          tiff_options == other.tiff_options &&
+          webp_options == other.webp_options
     end
 
     # @see the `==` method
@@ -346,7 +386,7 @@ module GroupDocsConversionCloud
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [from_page, pages_count, pages, watermark_options, width, height, horizontal_resolution, vertical_resolution, grayscale, rotate_angle, use_pdf, brightness, contrast, gamma, flip_mode, background_color].hash
+      [from_page, pages_count, pages, watermark_options, width, height, horizontal_resolution, vertical_resolution, grayscale, rotate_angle, use_pdf, brightness, contrast, gamma, flip_mode, background_color, jpeg_options, psd_options, tiff_options, webp_options].hash
     end
 
     # Downcases first letter.

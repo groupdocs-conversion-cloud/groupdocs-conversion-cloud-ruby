@@ -1,6 +1,6 @@
  #
  # --------------------------------------------------------------------------------------------------------------------
- # <copyright company="Aspose Pty Ltd" file="jpf_convert_options.rb">
+ # <copyright company="Aspose Pty Ltd" file="cad_convert_options.rb">
  #   Copyright (c) Aspose Pty Ltd
  # </copyright>
  # <summary>
@@ -28,8 +28,8 @@
 require 'date'
 
 module GroupDocsConversionCloud
-  # Jpf convert options
-  class JpfConvertOptions
+  # Options for to Cad conversion
+  class CadConvertOptions
 
     # Start conversion from FromPage page
     attr_accessor :from_page
@@ -43,44 +43,14 @@ module GroupDocsConversionCloud
     # Watermark specific options
     attr_accessor :watermark_options
 
-    # Desired image width after conversion
+    # Desired page width after conversion
     attr_accessor :width
 
-    # Desired image height after conversion
+    # Desired page height after conversion
     attr_accessor :height
 
-    # Desired image horizontal resolution after conversion. The default resolution is the resolution of the input file or 96dpi
-    attr_accessor :horizontal_resolution
-
-    # Desired image vertical resolution after conversion. The default resolution is the resolution of the input file or 96dpi
-    attr_accessor :vertical_resolution
-
-    # Convert to grayscale image
-    attr_accessor :grayscale
-
-    # Image rotation angle 
-    attr_accessor :rotate_angle
-
-    # If true, the input firstly is converted to PDF and after that to desired format
-    attr_accessor :use_pdf
-
-    # Adjust image brightness
-    attr_accessor :brightness
-
-    # Adjust image contrast
-    attr_accessor :contrast
-
-    # Adjust image gamma
-    attr_accessor :gamma
-
-    # Image flip mode
-    attr_accessor :flip_mode
-
-    # Gets or sets a background color.
-    attr_accessor :background_color
-
-    # Desired image quality when converting to Jpeg. The value must be between 0 and 100. The default value is 100.
-    attr_accessor :quality
+    # Page size
+    attr_accessor :page_size
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -112,17 +82,7 @@ module GroupDocsConversionCloud
         :'watermark_options' => :'WatermarkOptions',
         :'width' => :'Width',
         :'height' => :'Height',
-        :'horizontal_resolution' => :'HorizontalResolution',
-        :'vertical_resolution' => :'VerticalResolution',
-        :'grayscale' => :'Grayscale',
-        :'rotate_angle' => :'RotateAngle',
-        :'use_pdf' => :'UsePdf',
-        :'brightness' => :'Brightness',
-        :'contrast' => :'Contrast',
-        :'gamma' => :'Gamma',
-        :'flip_mode' => :'FlipMode',
-        :'background_color' => :'BackgroundColor',
-        :'quality' => :'Quality'
+        :'page_size' => :'PageSize'
       }
     end
 
@@ -135,17 +95,7 @@ module GroupDocsConversionCloud
         :'watermark_options' => :'WatermarkOptions',
         :'width' => :'Integer',
         :'height' => :'Integer',
-        :'horizontal_resolution' => :'Integer',
-        :'vertical_resolution' => :'Integer',
-        :'grayscale' => :'BOOLEAN',
-        :'rotate_angle' => :'Integer',
-        :'use_pdf' => :'BOOLEAN',
-        :'brightness' => :'Integer',
-        :'contrast' => :'Integer',
-        :'gamma' => :'Float',
-        :'flip_mode' => :'String',
-        :'background_color' => :'String',
-        :'quality' => :'Integer'
+        :'page_size' => :'String'
       }
     end
 
@@ -183,48 +133,8 @@ module GroupDocsConversionCloud
         self.height = attributes[:'Height']
       end
 
-      if attributes.key?(:'HorizontalResolution')
-        self.horizontal_resolution = attributes[:'HorizontalResolution']
-      end
-
-      if attributes.key?(:'VerticalResolution')
-        self.vertical_resolution = attributes[:'VerticalResolution']
-      end
-
-      if attributes.key?(:'Grayscale')
-        self.grayscale = attributes[:'Grayscale']
-      end
-
-      if attributes.key?(:'RotateAngle')
-        self.rotate_angle = attributes[:'RotateAngle']
-      end
-
-      if attributes.key?(:'UsePdf')
-        self.use_pdf = attributes[:'UsePdf']
-      end
-
-      if attributes.key?(:'Brightness')
-        self.brightness = attributes[:'Brightness']
-      end
-
-      if attributes.key?(:'Contrast')
-        self.contrast = attributes[:'Contrast']
-      end
-
-      if attributes.key?(:'Gamma')
-        self.gamma = attributes[:'Gamma']
-      end
-
-      if attributes.key?(:'FlipMode')
-        self.flip_mode = attributes[:'FlipMode']
-      end
-
-      if attributes.key?(:'BackgroundColor')
-        self.background_color = attributes[:'BackgroundColor']
-      end
-
-      if attributes.key?(:'Quality')
-        self.quality = attributes[:'Quality']
+      if attributes.key?(:'PageSize')
+        self.page_size = attributes[:'PageSize']
       end
 
     end
@@ -249,44 +159,8 @@ module GroupDocsConversionCloud
         invalid_properties.push("invalid value for 'height', height cannot be nil.")
       end
 
-      if @horizontal_resolution.nil?
-        invalid_properties.push("invalid value for 'horizontal_resolution', horizontal_resolution cannot be nil.")
-      end
-
-      if @vertical_resolution.nil?
-        invalid_properties.push("invalid value for 'vertical_resolution', vertical_resolution cannot be nil.")
-      end
-
-      if @grayscale.nil?
-        invalid_properties.push("invalid value for 'grayscale', grayscale cannot be nil.")
-      end
-
-      if @rotate_angle.nil?
-        invalid_properties.push("invalid value for 'rotate_angle', rotate_angle cannot be nil.")
-      end
-
-      if @use_pdf.nil?
-        invalid_properties.push("invalid value for 'use_pdf', use_pdf cannot be nil.")
-      end
-
-      if @brightness.nil?
-        invalid_properties.push("invalid value for 'brightness', brightness cannot be nil.")
-      end
-
-      if @contrast.nil?
-        invalid_properties.push("invalid value for 'contrast', contrast cannot be nil.")
-      end
-
-      if @gamma.nil?
-        invalid_properties.push("invalid value for 'gamma', gamma cannot be nil.")
-      end
-
-      if @flip_mode.nil?
-        invalid_properties.push("invalid value for 'flip_mode', flip_mode cannot be nil.")
-      end
-
-      if @quality.nil?
-        invalid_properties.push("invalid value for 'quality', quality cannot be nil.")
+      if @page_size.nil?
+        invalid_properties.push("invalid value for 'page_size', page_size cannot be nil.")
       end
 
       return invalid_properties
@@ -299,32 +173,23 @@ module GroupDocsConversionCloud
       return false if @pages_count.nil?
       return false if @width.nil?
       return false if @height.nil?
-      return false if @horizontal_resolution.nil?
-      return false if @vertical_resolution.nil?
-      return false if @grayscale.nil?
-      return false if @rotate_angle.nil?
-      return false if @use_pdf.nil?
-      return false if @brightness.nil?
-      return false if @contrast.nil?
-      return false if @gamma.nil?
-      return false if @flip_mode.nil?
-      flip_mode_validator = EnumAttributeValidator.new('String', ["None", "FlipX", "FlipY", "FlipXY"])
-      return false unless flip_mode_validator.valid?(@flip_mode)
-      return false if @quality.nil?
+      return false if @page_size.nil?
+      page_size_validator = EnumAttributeValidator.new('String', ["Default", "A3", "Statement", "Quarto", "Paper11x17", "Paper10x14", "Letter", "Legal", "Ledger", "Folio", "Executive", "EnvelopeDL", "Custom", "B5", "B4", "A5", "A4", "Tabloid"])
+      return false unless page_size_validator.valid?(@page_size)
       return true
     end
 
     # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] flip_mode Object to be assigned
-    def flip_mode=(flip_mode)
-      validator = EnumAttributeValidator.new('String', ["None", "FlipX", "FlipY", "FlipXY"])
-      if flip_mode.to_i == 0
-        unless validator.valid?(flip_mode)
-          raise ArgumentError, "invalid value for 'flip_mode', must be one of #{validator.allowable_values}."
+    # @param [Object] page_size Object to be assigned
+    def page_size=(page_size)
+      validator = EnumAttributeValidator.new('String', ["Default", "A3", "Statement", "Quarto", "Paper11x17", "Paper10x14", "Letter", "Legal", "Ledger", "Folio", "Executive", "EnvelopeDL", "Custom", "B5", "B4", "A5", "A4", "Tabloid"])
+      if page_size.to_i == 0
+        unless validator.valid?(page_size)
+          raise ArgumentError, "invalid value for 'page_size', must be one of #{validator.allowable_values}."
         end
-        @flip_mode = flip_mode
+        @page_size = page_size
       else
-        @flip_mode = validator.allowable_values[flip_mode.to_i]
+        @page_size = validator.allowable_values[page_size.to_i]
       end
     end
 
@@ -339,17 +204,7 @@ module GroupDocsConversionCloud
           watermark_options == other.watermark_options &&
           width == other.width &&
           height == other.height &&
-          horizontal_resolution == other.horizontal_resolution &&
-          vertical_resolution == other.vertical_resolution &&
-          grayscale == other.grayscale &&
-          rotate_angle == other.rotate_angle &&
-          use_pdf == other.use_pdf &&
-          brightness == other.brightness &&
-          contrast == other.contrast &&
-          gamma == other.gamma &&
-          flip_mode == other.flip_mode &&
-          background_color == other.background_color &&
-          quality == other.quality
+          page_size == other.page_size
     end
 
     # @see the `==` method
@@ -361,7 +216,7 @@ module GroupDocsConversionCloud
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [from_page, pages_count, pages, watermark_options, width, height, horizontal_resolution, vertical_resolution, grayscale, rotate_angle, use_pdf, brightness, contrast, gamma, flip_mode, background_color, quality].hash
+      [from_page, pages_count, pages, watermark_options, width, height, page_size].hash
     end
 
     # Downcases first letter.

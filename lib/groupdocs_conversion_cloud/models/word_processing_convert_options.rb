@@ -66,6 +66,9 @@ module GroupDocsConversionCloud
 
     # Specifies page orientation
     attr_accessor :page_orientation
+
+    # RTF specific convert options
+    attr_accessor :rtf_options
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -102,7 +105,8 @@ module GroupDocsConversionCloud
         :'zoom' => :'Zoom',
         :'pdf_recognition_mode' => :'PdfRecognitionMode',
         :'page_size' => :'PageSize',
-        :'page_orientation' => :'PageOrientation'
+        :'page_orientation' => :'PageOrientation',
+        :'rtf_options' => :'RtfOptions'
       }
     end
 
@@ -120,7 +124,8 @@ module GroupDocsConversionCloud
         :'zoom' => :'Integer',
         :'pdf_recognition_mode' => :'String',
         :'page_size' => :'String',
-        :'page_orientation' => :'String'
+        :'page_orientation' => :'String',
+        :'rtf_options' => :'RtfConvertOptions'
       }
     end
 
@@ -180,6 +185,10 @@ module GroupDocsConversionCloud
 
       if attributes.key?(:'PageOrientation')
         self.page_orientation = attributes[:'PageOrientation']
+      end
+
+      if attributes.key?(:'RtfOptions')
+        self.rtf_options = attributes[:'RtfOptions']
       end
 
     end
@@ -306,7 +315,8 @@ module GroupDocsConversionCloud
           zoom == other.zoom &&
           pdf_recognition_mode == other.pdf_recognition_mode &&
           page_size == other.page_size &&
-          page_orientation == other.page_orientation
+          page_orientation == other.page_orientation &&
+          rtf_options == other.rtf_options
     end
 
     # @see the `==` method
@@ -318,7 +328,7 @@ module GroupDocsConversionCloud
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [from_page, pages_count, pages, watermark_options, width, height, dpi, password, zoom, pdf_recognition_mode, page_size, page_orientation].hash
+      [from_page, pages_count, pages, watermark_options, width, height, dpi, password, zoom, pdf_recognition_mode, page_size, page_orientation, rtf_options].hash
     end
 
     # Downcases first letter.

@@ -49,9 +49,6 @@ module GroupDocsConversionCloud
     # Specifies the zoom level in percentage. Default is 100.
     attr_accessor :zoom
 
-    # If true, the input firstly is converted to PDF and after that to desired format
-    attr_accessor :use_pdf
-
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -60,8 +57,7 @@ module GroupDocsConversionCloud
         :'pages' => :'Pages',
         :'watermark_options' => :'WatermarkOptions',
         :'password' => :'Password',
-        :'zoom' => :'Zoom',
-        :'use_pdf' => :'UsePdf'
+        :'zoom' => :'Zoom'
       }
     end
 
@@ -73,8 +69,7 @@ module GroupDocsConversionCloud
         :'pages' => :'Array<Integer>',
         :'watermark_options' => :'WatermarkOptions',
         :'password' => :'String',
-        :'zoom' => :'Integer',
-        :'use_pdf' => :'BOOLEAN'
+        :'zoom' => :'Integer'
       }
     end
 
@@ -112,10 +107,6 @@ module GroupDocsConversionCloud
         self.zoom = attributes[:'Zoom']
       end
 
-      if attributes.key?(:'UsePdf')
-        self.use_pdf = attributes[:'UsePdf']
-      end
-
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -134,10 +125,6 @@ module GroupDocsConversionCloud
         invalid_properties.push("invalid value for 'zoom', zoom cannot be nil.")
       end
 
-      if @use_pdf.nil?
-        invalid_properties.push("invalid value for 'use_pdf', use_pdf cannot be nil.")
-      end
-
       return invalid_properties
     end
 
@@ -147,7 +134,6 @@ module GroupDocsConversionCloud
       return false if @from_page.nil?
       return false if @pages_count.nil?
       return false if @zoom.nil?
-      return false if @use_pdf.nil?
       return true
     end
 
@@ -161,8 +147,7 @@ module GroupDocsConversionCloud
           pages == other.pages &&
           watermark_options == other.watermark_options &&
           password == other.password &&
-          zoom == other.zoom &&
-          use_pdf == other.use_pdf
+          zoom == other.zoom
     end
 
     # @see the `==` method
@@ -174,7 +159,7 @@ module GroupDocsConversionCloud
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [from_page, pages_count, pages, watermark_options, password, zoom, use_pdf].hash
+      [from_page, pages_count, pages, watermark_options, password, zoom].hash
     end
 
     # Downcases first letter.

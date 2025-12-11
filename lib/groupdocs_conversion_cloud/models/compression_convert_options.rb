@@ -1,6 +1,6 @@
  #
  # --------------------------------------------------------------------------------------------------------------------
- # <copyright company="Aspose Pty Ltd" file="xlsx_convert_options.rb">
+ # <copyright company="Aspose Pty Ltd" file="compression_convert_options.rb">
  #   Copyright (c) Aspose Pty Ltd
  # </copyright>
  # <summary>
@@ -28,8 +28,8 @@
 require 'date'
 
 module GroupDocsConversionCloud
-  # Xlsx convert options
-  class XlsxConvertOptions
+  # Options for to zip conversion
+  class CompressionConvertOptions
 
     # Start conversion from FromPage page
     attr_accessor :from_page
@@ -46,12 +46,6 @@ module GroupDocsConversionCloud
     # Set this property if you want to protect the converted document with a password
     attr_accessor :password
 
-    # Specifies the zoom level in percentage. Default is 100.
-    attr_accessor :zoom
-
-    # If true, the input firstly is converted to PDF and after that to desired format
-    attr_accessor :use_pdf
-
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -59,9 +53,7 @@ module GroupDocsConversionCloud
         :'pages_count' => :'PagesCount',
         :'pages' => :'Pages',
         :'watermark_options' => :'WatermarkOptions',
-        :'password' => :'Password',
-        :'zoom' => :'Zoom',
-        :'use_pdf' => :'UsePdf'
+        :'password' => :'Password'
       }
     end
 
@@ -72,9 +64,7 @@ module GroupDocsConversionCloud
         :'pages_count' => :'Integer',
         :'pages' => :'Array<Integer>',
         :'watermark_options' => :'WatermarkOptions',
-        :'password' => :'String',
-        :'zoom' => :'Integer',
-        :'use_pdf' => :'BOOLEAN'
+        :'password' => :'String'
       }
     end
 
@@ -108,14 +98,6 @@ module GroupDocsConversionCloud
         self.password = attributes[:'Password']
       end
 
-      if attributes.key?(:'Zoom')
-        self.zoom = attributes[:'Zoom']
-      end
-
-      if attributes.key?(:'UsePdf')
-        self.use_pdf = attributes[:'UsePdf']
-      end
-
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -130,14 +112,6 @@ module GroupDocsConversionCloud
         invalid_properties.push("invalid value for 'pages_count', pages_count cannot be nil.")
       end
 
-      if @zoom.nil?
-        invalid_properties.push("invalid value for 'zoom', zoom cannot be nil.")
-      end
-
-      if @use_pdf.nil?
-        invalid_properties.push("invalid value for 'use_pdf', use_pdf cannot be nil.")
-      end
-
       return invalid_properties
     end
 
@@ -146,8 +120,6 @@ module GroupDocsConversionCloud
     def valid?
       return false if @from_page.nil?
       return false if @pages_count.nil?
-      return false if @zoom.nil?
-      return false if @use_pdf.nil?
       return true
     end
 
@@ -160,9 +132,7 @@ module GroupDocsConversionCloud
           pages_count == other.pages_count &&
           pages == other.pages &&
           watermark_options == other.watermark_options &&
-          password == other.password &&
-          zoom == other.zoom &&
-          use_pdf == other.use_pdf
+          password == other.password
     end
 
     # @see the `==` method
@@ -174,7 +144,7 @@ module GroupDocsConversionCloud
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [from_page, pages_count, pages, watermark_options, password, zoom, use_pdf].hash
+      [from_page, pages_count, pages, watermark_options, password].hash
     end
 
     # Downcases first letter.
