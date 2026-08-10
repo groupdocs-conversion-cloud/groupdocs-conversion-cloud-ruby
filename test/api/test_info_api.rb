@@ -58,7 +58,8 @@ module GroupDocsConversionCloud
       error = assert_raises ApiClientError do
         @info_api.get_document_metadata(request)
       end
-      assert_equal true, error.message.include?("AmazonS3 Storage exception: The specified key does not exist.")
+      assert_equal true, error.message.include?("AmazonS3 Storage exception")
+      assert_equal true, error.message.include?(TestFile.not_exist.file_name)
     end        
 
   end

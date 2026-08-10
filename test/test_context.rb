@@ -30,7 +30,6 @@ module GroupDocsConversionCloud
     OpenSSL::SSL::VERIFY_PEER = OpenSSL::SSL::VERIFY_NONE
 
     require "minitest/autorun"
-    require "minitest/unit"
 
     require_relative './../lib/groupdocs_conversion_cloud'
     require_relative './test_settings'
@@ -38,7 +37,7 @@ module GroupDocsConversionCloud
 
     class TestContext < Minitest::Test
 
-      include MiniTest::Assertions
+      include Minitest::Assertions
 
       @@test_files_uploaded ||= false
 

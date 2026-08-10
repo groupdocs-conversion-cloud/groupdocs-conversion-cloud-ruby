@@ -28,7 +28,6 @@
 module GroupDocsConversionCloud
   
   require "minitest/autorun"
-  require "minitest/unit"
 
   require_relative './../../lib/groupdocs_conversion_cloud'
   require_relative '../test_settings'
